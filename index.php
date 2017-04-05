@@ -28,15 +28,16 @@
 		<?php		
                 if(isset($_POST['Submit']))
         {
-			$emne = $_POST['emne'];
-            $name = $_POST['name'];
-            $mail = $_POST['mail'];
-            $besked = $_POST['besked'];
+			$name = $_POST['name'];
+          	$emne = $_POST['emne'];
+            $call = $_POST['call'];
+            $dateofevent = $_POST['dateofevent'];
+            $note = $_POST['note'];
            
-           $query = "INSERT INTO kontakt    
-                     (name, call, dateofevent, note)
+           $query = "INSERT INTO post    
+                     (`name`, `regDate`, `emne`, `note`, `deadline_date`, `dateOfEvenet`) 
                      VALUES 
-					('$name','$call', '$dateofevent','$note')";
+					('$name',' '$emne', $call', '$dateofevent','$note')";
            
    
     mysql_query($query) or die(mysql_error());
@@ -49,6 +50,7 @@
 	<h2>Opret et Post It</h2>
 	<form action="show.php" method="post">
 		<input type="text" name="name" placeholder="Name"><br><br>
+      <input type="text" name="emne" placeholder="Emne"><br><br>
 		<input type="date" name="call" id="call"> Last call<br><br>
 		<input type="date" name="date" id="dateofevent" > Date of event<br><br>
 		<textarea name="note" placeholder="your note here"></textarea><br><br>
