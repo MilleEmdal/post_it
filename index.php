@@ -24,17 +24,38 @@
 <div class="fill">
 	
 </div>
+  
+		<?php		
+                if(isset($_POST['Submit']))
+        {
+			$emne = $_POST['emne'];
+            $name = $_POST['name'];
+            $mail = $_POST['mail'];
+            $besked = $_POST['besked'];
+           
+           $query = "INSERT INTO kontakt    
+                     (name, call, dateofevent, note)
+                     VALUES 
+					('$name','$call', '$dateofevent','$note')";
+           
+   
+    mysql_query($query) or die(mysql_error());
+    mysql_close();
+   
+           $msg = "Post it´en er oprettet";
+		}
+   ?>
 <fieldset>
 	<h2>Opret et Post It</h2>
-	<form>
+	<form action="show.php" method="post">
 		<input type="text" name="name" placeholder="Name"><br><br>
-		<input type="date" name="call"> Last call<br><br>
-		<input type="date" name="date"> Date of event<br><br>
+		<input type="date" name="call" id="call"> Last call<br><br>
+		<input type="date" name="date" id="dateofevent" > Date of event<br><br>
 		<textarea name="note" placeholder="your note here"></textarea><br><br>
 		<input type="submit" name="cmd" value="Send Opslag">
 	</form>
 	
 </fieldset>
-
+<?php echo $msg; ?>
 </body>
 </html>
