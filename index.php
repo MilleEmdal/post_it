@@ -50,8 +50,8 @@
 <fieldset>
 	<h2>Opret et Post It</h2>
 	<form action="show.php" method="post">
-		<input type="text" name="name" placeholder="Name"><br><br>
-      	<input type="text" name="emne" placeholder="Emne"><br><br>
+		<input type="text" name="name" id="name" placeholder="Name"><br><br>
+      	<input type="text" name="emne" id="emne" placeholder="Emne"><br><br>
 		<input type="date" name="deadline_date" id="deadline_date"> Sidste udkald<br><br>
 		<input type="date" name="dateOfEvenet" id="dateOfEvenet" > Dato på eventet<br><br>
 		<textarea name="note" id="note" placeholder="your note here"></textarea><br><br>
