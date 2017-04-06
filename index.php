@@ -30,14 +30,15 @@
         {
 			$name = $_POST['name'];
           	$emne = $_POST['emne'];
-            $call = $_POST['call'];
-            $dateofevent = $_POST['dateofevent'];
+            $deadline_date = $_POST['deadline_date'];
+			$regDate = $_POST['regDate'];            
+			$dateofevent = $_POST['dateOfEvenet'];
             $note = $_POST['note'];
            
            $query = "INSERT INTO post    
                      (`name`, `regDate`, `emne`, `note`, `deadline_date`, `dateOfEvenet`) 
                      VALUES 
-					('$name',' '$emne', $call', '$dateofevent','$note')";
+					('$name',' '$emne', $deadline_date', '$regDate' , '$dateofevent','$note')";
            
    
     mysql_query($query) or die(mysql_error());
@@ -50,8 +51,8 @@
 	<h2>Opret et Post It</h2>
 	<form action="show.php" method="post">
 		<input type="text" name="name" placeholder="Name"><br><br>
-      <input type="text" name="emne" placeholder="Emne"><br><br>
-		<input type="date" name="call" id="call"> Last call<br><br>
+      	<input type="text" name="emne" placeholder="Emne"><br><br>
+		<input type="date" name="deadline_date" id="call"> Last call<br><br>
 		<input type="date" name="date" id="dateofevent" > Date of event<br><br>
 		<textarea name="note" placeholder="your note here"></textarea><br><br>
 		<input type="submit" name="cmd" value="Send Opslag">
