@@ -1,10 +1,7 @@
 <!doctype html>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
+include 'db_con.php';
 ?>
-
 <html>
 <head>
 <meta charset="utf-8">
@@ -22,7 +19,7 @@ $password = "root";
 			<ul>
 				<br>
 				<li><a href="index.php">Skriv dit opslag</a></li>
-				<li><a href="#">Se alle opslagene</a></li>
+				<li><a href="show.php">Se alle opslagene</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -31,40 +28,69 @@ $password = "root";
 	
 </div>
   
-		<?php		
-                if(isset($_POST['Submit']))
-        {
-			$name = $_POST['name'];
-          	$emne = $_POST['emne'];
-            $deadline_date = $_POST['deadline_date'];
-			$regDate = $_POST['regDate'];            
-			$dateofevent = $_POST['dateOfEvenet'];
-            $note = $_POST['note'];
-           
-           $query = "INSERT INTO post    
-                     (`name`, `regDate`, `emne`, `note`, `deadline_date`, `dateOfEvenet`) 
-                     VALUES 
-					('$name',' '$emne', $deadline_date', '$regDate' , '$dateofevent','$note')";
-           
-   
-    mysql_query($query) or die(mysql_error());
-    mysql_close();
-   
-           $msg = "Post it´en er oprettet";
-		}
-   ?>
-<fieldset>
-	<h2>Opret et Post It</h2>
-	<form action="show.php" method="post">
-		<input type="text" name="name" placeholder="Name"><br><br>
-      	<input type="text" name="emne" placeholder="Emne"><br><br>
-		<input type="date" name="deadline_date" id="deadline_date"> Sidste udkald<br><br>
-		<input type="date" name="dateOfEvenet" id="dateOfEvenet" > Dato på eventet<br><br>
-		<textarea name="note" id="note" placeholder="your note here"></textarea><br><br>
-		<input type="submit" name="submit" id="submit" value="Send Opslag">
-	</form>
+		<?php	
+		
+			$name = filter_input(INPUT_POST, 'name');
+          	$emne = filter_input(INPUT_POST, 'emne');
+            $deadline_date = filter_input(INPUT_POST, 'deadline_date');
+			$regDate = filter_input(INPUT_POST, 'regDate');            
+			$dateofevent = filter_input(INPUT_POST, 'dateOfEvenet');
+            $note = filter_input(INPUT_POST, 'note');
+			$submit = filter_input(INPUT_POST, 'submit');
 	
-</fieldset>
-<?php echo $msg; ?>
+	if(empty($submit)){
+		?>
+	<form action="show.php" method="post">
+		<fieldset>
+			<legend>Opret et Post It</legend>
+		<input type="text" name="name" placeholder="Navn"><br><br>
+      	<input type="text" name="emne" placeholder="Emne"><br><br>
+		<p>Tilmeldningsfrist:</p>
+		<input type="date" name="deadline_date" id="deadline_date" placeholder="Skriv sidste frist for tilmeldning"><br><br>
+		<p>Dato p&aring; eventet:</p>
+		<input type="date" name="dateOfEvenet" id="dateOfEvenet" placeholder="Skriv dato for evnet"><br><br>
+		<textarea name="note" id="note" placeholder="Skriv beskrivelse af event"></textarea><br><br>
+		<input type="submit" name="submit" id="submit" value="Send opslag">
+	</fieldset> 
+		</form>
+	
+		<?php
+	}
+	else {
+		if($submit == 'Send opslag') {
+			require_once('db_con.php');
+			$sql = 'INSERT INTO post (name, emne, deadline_date, dateOfEvenet, note) VALUES (?, ?, ?, ?, ?)';
+			$stmt = $con->prepare($sql);
+			$stmt->bind_param('sssss', $name, $emne, $deadline_date, $dateofevent, $note);
+			$stmt->execute();
+			
+			if ($stmt->affected_rows > 0){
+				echo 'Du har nu oprettet en ';
+			}
+			else {
+				echo $emne.'Evnentet er oprettet';
+			}
+		}
+
+	/*	if($cmd == 'Afmeld') {
+			require_once('db_con.php');
+			$sql = 'DELETE FROM post WHERE id=?';
+			$stmt = $con->prepare($sql);
+			$stmt->bind_param('s', $id);
+			$stmt->execute();
+			
+			if ($stmt->affected_rows > 0){
+				echo 'Du er nu fjernet fra SPAM-listen :-((';
+			}
+			else {
+				echo $email.' var ikke p� listen?!?!';
+			}
+		}
+
+		echo '<hr><a href="newsletter.php"> Tilbage</a>';*/
+	}
+	
+?>
+
 </body>
 </html>

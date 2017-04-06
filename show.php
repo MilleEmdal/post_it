@@ -1,13 +1,7 @@
 <!doctype html>
 <?php
-session_start();
-$servername = "localhost";
-$username = "root";
-$password = "root";
+include 'db_con.php';
 ?>
-
-
-
 <head>
 <meta charset="utf-8">
 <title>Post It Show</title>
@@ -15,7 +9,9 @@ $password = "root";
 </head>
 
 <body>
+	
 	<div class="full">
+		
 	<div class="menu">
 	<div class="logo">
 		<img src="post it.png">
@@ -29,27 +25,22 @@ $password = "root";
 		</nav>
 	</div>
 		<?php
-		
-			$sql = "SELECT * FROM forside"; 
-		
-		$result = mysql_query ($sql) or die (mysql_error());  
-		
-		echo 'hej';
-		
-	/*		if ($row = mysql_fetch_assoc ($result))
-	{
-		//echo siger at det er de felter der skal vises
-		echo $row['name']. '<br />';
-		echo $row['note']. '<br />';
-		
-	}
-	else{
-	echo '';
-	}*/
+		//prepared statement for at kunne læse data fra en database
+$stmt = $con->prepare("SELECT name, emne, deadline_date, dateOfEvenet, note FROM post");
+// execute the statement
+$stmt->execute();
+// forberedelsen til data afhentning: prepared statement
+$stmt->bind_result($name, $emne, $deadline_date, $dateofevent, $note);
+// Frontend layout som liste:
+echo '<ol>';
+// hente data 
+// while loop: så længe jeg kan hente noget fra databasen
+while($stmt->fetch()){
+	// viser ALT som list item
+	echo "<li>$name, $emne, $deadline_date, $dateofevent, $note</li>";
+ }
 			?>
-	
-
-	<div class="show">
+		<div class="show">
 		<h1>Opslag</h1>
 	</div>
 	</div>
