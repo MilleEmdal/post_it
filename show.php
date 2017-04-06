@@ -1,4 +1,10 @@
 <!doctype html>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "root";
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -20,6 +26,11 @@
 			</ul>
 		</nav>
 	</div>
+		<?php
+		
+			"SELECT * FROM post";
+		
+			?>
 	
 
 	<div class="show">
