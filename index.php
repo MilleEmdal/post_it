@@ -52,10 +52,10 @@
 	<form action="show.php" method="post">
 		<input type="text" name="name" placeholder="Name"><br><br>
       	<input type="text" name="emne" placeholder="Emne"><br><br>
-		<input type="date" name="deadline_date" id="deadline_date"> Last call<br><br>
-		<input type="date" name="dateOfEvenet" id="dateOfEvenet" > Date of event<br><br>
-		<textarea name="note" placeholder="your note here"></textarea><br><br>
-		<input type="submit" name="cmd" value="Send Opslag">
+		<input type="date" name="deadline_date" id="deadline_date"> Sidste udkald<br><br>
+		<input type="date" name="dateOfEvenet" id="dateOfEvenet" > Dato på eventet<br><br>
+		<textarea name="note" id="note" placeholder="your note here"></textarea><br><br>
+		<input type="submit" name="submit" id="submit" value="Send Opslag">
 	</form>
 	
 </fieldset>
