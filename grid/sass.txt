@@ -1,0 +1,6 @@
+Brug af Sass:
+
+Det smarte ved Sass er at man kan koble flere css filer sammen så 
+de alle sammen går igennem et link i din header.
+Istedet for at at have mange link til css'en.
+Det gør det mere overskueligt.

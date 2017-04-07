@@ -1,0 +1,36 @@
+/* Scss Document */
+
+@mixin min-font 
+{
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	font-size: 0.8em;
+	color: #332C96;
+	text-align: center;
+}
+
+
+body
+{
+	@include min-font;
+}
+
+.content 
+{
+	background: #eee;
+	padding-top: 8px;
+}
+
+.logo, .nav
+{
+	height: 50px;
+}
+
+.box
+{
+	height: 250px;
+}
+
+.footer
+{
+	height: 50px;
+}
